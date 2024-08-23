@@ -1,4 +1,4 @@
-# Documentación Assesment Pragma 2024
+# documentación Assesment Pragma 2024
 
 ## Introducción
 
@@ -21,58 +21,99 @@ Esta solución integral combina la potencia y flexibilidad de los servicios de A
 A continuacion se relacionara cada API/servicio que se implemento
 ## APIs
 
-### [* ProyectosAPI](DOC/Proyectos/Readme.md "ver capacidad")
+### [* ProyectosAPI](doc/Proyectos/Readme.md "ver capacidad")
 
 La API de Proyectos está diseñada para gestionar información relacionada con proyectos de construcción. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los datos de los proyectos almacenados en un sistema de base de datos.
-#### [Ver Swagger](DOC/Proyectos/contrato/API_Proyectos.yaml "ver capacidad")
+#### [Ver Swagger](doc/Proyectos/contrato/API_Proyectos.yaml "ver capacidad")
 
-### [* UnidadesAPI](DOC/Unidades/Readme.md "ver capacidad")
+### [* UnidadesAPI](doc/Unidades/Readme.md "ver capacidad")
 
 La API de Unidades permite la gestión integral de unidades de vivienda, facilitando la creación, consulta, actualización y eliminación de registros en una tabla DynamoDB dedicada. Esta API es esencial para administrar el inventario de unidades en proyectos residenciales y comerciales, asegurando un manejo eficiente y accesible de la información relevante para cada unidad.
-#### [Ver Swagger](DOC/Unidades/contrato/API_Unidades.yaml "ver capacidad")
+#### [Ver Swagger](doc/Unidades/contrato/API_Unidades.yaml "ver capacidad")
 
-### [* RecursosAPI](DOC/Recursos/Readme.md "ver capacidad")
+### [* RecursosAPI](doc/Recursos/Readme.md "ver capacidad")
 
 La API de Recursos está diseñada para gestionar los recursos asociados a proyectos, como materiales, personal y maquinaria. Permite realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre los recursos almacenados en DynamoDB, garantizando un control preciso y actualizado del inventario disponible para su asignación en distintos proyectos. 
-#### [Ver Swagger](DOC/Recursos/contrato/API_Recursos.yaml "ver capacidad")
+#### [Ver Swagger](doc/Recursos/contrato/API_Recursos.yaml "ver capacidad")
 
-### [* VentasReservasAPI](DOC/VentasReservas/Readme.md "ver capacidad")
+### [* VentasReservasAPI](doc/VentasReservas/Readme.md "ver capacidad")
 
 La API de Ventas y Reservas permite gestionar transacciones relacionadas con la venta y reserva de unidades de vivienda. Facilita la creación, consulta, actualización y eliminación de registros de ventas y reservas en DynamoDB, permitiendo el seguimiento del estado de las transacciones, la asignación de unidades y la gestión de comisiones asociadas a cada operación.
-#### [Ver Swagger](DOC/VentasReservas/contrato/API_VentasReservas.yaml "ver capacidad")
+#### [Ver Swagger](doc/VentasReservas/contrato/API_VentasReservas.yaml "ver capacidad")
 
-### [* ClientesAPI](DOC/Clientes/Readme.md "ver capacidad")
+### [* ClientesAPI](doc/Clientes/Readme.md "ver capacidad")
 
 La API de Clientes permite gestionar la información de los clientes en el sistema. Ofrece operaciones para crear, consultar, actualizar y eliminar registros de clientes en DynamoDB. Facilita la administración de datos como nombre, correo electrónico, teléfono, dirección, fecha de nacimiento, documento de identificación y tipo de cliente.
-#### [Ver Swagger](DOC/Clientes/contrato/API_Cliente.yaml "ver capacidad")
+#### [Ver Swagger](doc/Clientes/contrato/API_Cliente.yaml "ver capacidad")
 
 ## Funcionalidad
 
-A continuación se explica la funcionalidad completa de la solución con un diagrama de secuencia:
-![Diagrama de secuencia](./diagrams/secuence.svg)
+A continuación se describe detalladamente cómo funciona la solución mediante un diagrama de secuencia:
 
-En primer lugar el consumidor realiza la petición al componente de integración pasando en el path el id del cliente. A continuación este componente lanza pediciones ascincronas tanto a customer como a finance_product con el fin de obtener los datos requeridos. Luego se combinan estos dos json en uno solo que sea entendible por el siguiente componente, el cual es el decision_engine. Procesa la lógica necesaria y retorna la misma estructura json pero con los productos fiancieros filtrados.
+![diagram](diagramas/diagramadesecuencia.png)
 
-## Objetos de negocio
-![Modelo canónico](./diagrams/canonical.svg)
+Este diagrama de secuencia ilustra el proceso completo de autenticación y manejo de solicitudes en un sistema que integra AWS Cognito, API Gateway, Lambda y DynamoDB.
 
-## Tablas de bases de datos
-![Tablas bases de datos](./diagrams/database_tables.svg)
+### Solicitud de Autenticación:
 
-## Modelo de despliegue objetivo
+- El proceso comienza cuando el cliente envía una solicitud de autenticación a AWS Cognito.
 
-Actualmente el proyecto se encuenta únicamente en local, pero el modelo objetivo de despliegue a futuro es el siguiente:
-![Modelo objetivo](./diagrams/target.svg)
+### Validación de la Autenticación:
 
-En donde se tiene un cluster de EKS en donde deberían estar desplegados todos los componentes en Deploys separados y con una política de HPA. El componente de observabilidad de Prometheus + Grafana también estaría dispuesto dentro de un Deploy independiente.  
-Aparte, bases de datos RDS para el almacenamiento de información persistente (customers y financeProducts).  
-Un secrets manager para almacenar los secretos de cada uno de los servicios.  
-Finalmente una ruta de entrada a través de un Route53, luego por un WAF y finalmente un ALB.
+- Si la autenticación no es válida, Cognito rechaza la solicitud, finalizando el proceso.
 
-## Diagrama de Componentes y Conectores
-![Diagrama componentes y conectores](./diagrams/components_connectors.svg)
+- En caso de que la autenticación sea exitosa, Cognito genera un token y lo envía de vuelta al cliente.
 
-En este diagrama se pueden notar las conexiones que realizan los componentes a lo largo de la solución.
+### Creación y Envío de la Solicitud:
+
+- Con el token recibido, el cliente construye una solicitud y la envía a través de API Gateway.
+
+### Invocación de la Función Lambda:
+
+- API Gateway recibe la solicitud y llama a una función Lambda que maneja la lógica de negocio.
+
+- La función Lambda interactúa con DynamoDB para consultar o actualizar los datos necesarios.
+
+### Respuesta:
+
+- DynamoDB devuelve el resultado de la consulta a la función Lambda, que procesa la información y la devuelve a API Gateway.
+
+- Finalmente, API Gateway envía la respuesta al cliente.
+
+Este proceso asegura que solo los clientes autenticados puedan acceder a los recursos protegidos, permitiendo una comunicación segura y controlada entre los servicios AWS involucrados.
+
+## Modelo de Arquitectura
+
+![diagram](diagramas/AWS.svg)
+
+El diagrama presentado muestra una arquitectura orientada a servicios dentro del ecosistema AWS, diseñada para proporcionar una solución segura, escalable y de alto rendimiento. Esta arquitectura es el resultado de una planificación estratégica para maximizar la eficiencia y la seguridad en la gestión de recursos y datos.
+
+### Autenticación y Autorización (Cognito)
+- Rol: AWS Cognito se encarga de asegurar que solo los usuarios autenticados pueden interactuar con la aplicación.
+
+- Proceso: Los usuarios envían sus credenciales, y Cognito verifica su autenticidad, proporcionando tokens de acceso que se utilizan para autorizar las solicitudes a través de la API Gateway.
+
+### Gestión del Tráfico y Enrutamiento (API Gateway)
+- Rol: API Gateway actúa como un proxy centralizado, recibiendo y distribuyendo las solicitudes a los servicios correspondientes.
+
+- Proceso: Una vez que las solicitudes son autenticadas por Cognito, API Gateway enruta las peticiones al servicio adecuado (Lambda) basado en el endpoint al que se dirige la solicitud. Esta capa también ofrece control de acceso y protección contra ataques DDoS.
+
+### Ejecución de Lógica de Negocio (Lambda)
+- Rol: AWS Lambda es el motor de la lógica de negocio. Permite ejecutar funciones en respuesta a eventos sin necesidad de gestionar servidores.
+
+- Proceso: Cada vez que una solicitud llega a API Gateway, Lambda ejecuta la lógica necesaria para procesar la solicitud, ya sea consultando datos, modificándolos, o interactuando con otros servicios AWS. Los permisos son gestionados cuidadosamente a través de políticas IAM para garantizar que Lambda solo tenga acceso a los recursos necesarios.
+
+### Almacenamiento Persistente (DynamoDB)
+- Rol: DynamoDB es el almacén de datos de la solución, utilizado para gestionar datos de manera escalable y de alta disponibilidad.
+
+- Proceso: Lambda interactúa con DynamoDB para realizar operaciones CRUD, asegurando que la información esté almacenada y accesible según sea necesario, manteniendo la consistencia y rendimiento.
+
+### Monitoreo y Observabilidad (CloudWatch)
+- Rol: AWS CloudWatch proporciona capacidades de monitoreo integral, recolectando métricas y logs de cada componente de la arquitectura.
+
+- Proceso: CloudWatch rastrea el comportamiento de los recursos en tiempo real, emite alertas en caso de anomalías, y ofrece dashboards visuales que permiten al equipo de desarrollo y operaciones tomar decisiones informadas rápidamente. Esto asegura que la solución opere de manera óptima y cualquier problema sea detectado y resuelto con prontitud.
+
+La arquitectura implementada en AWS, como se detalla en el diagrama, ofrece una solución integral y optimizada que equilibra seguridad, escalabilidad y rendimiento, adaptándose de manera efectiva a las demandas de la aplicación. Cada componente de la arquitectura desempeña un rol crucial y está cuidadosamente integrado para proporcionar un sistema cohesivo y eficiente, asegurando que la solución no solo cumple con los requisitos funcionales, sino que también está optimizada para la escalabilidad, seguridad y monitoreo continuo.
 
 ## Observabilidad
 
