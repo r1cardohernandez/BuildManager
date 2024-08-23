@@ -1,0 +1,32 @@
+[
+    {
+        "DocumentoID": "1234567891",
+        "Telefono": "+1234567891",
+        "Nombre": "Luis Pérez",
+        "TipoCliente": "Corporativo",
+        "ClienteID": "C002",
+        "CorreoElectronico": "luis.perez@example.com",
+        "Direccion": "Avenida Siempre Viva 742, Ciudad, País",
+        "FechaNacimiento": "1975-08-22"
+    },
+    {
+        "DocumentoID": "1234567894",
+        "Telefono": "+1234567894",
+        "Nombre": "Sofía López",
+        "TipoCliente": "Particular",
+        "ClienteID": "C005",
+        "CorreoElectronico": "sofia.lopez@example.com",
+        "Direccion": "Calle de la Amargura 321, Ciudad, País",
+        "FechaNacimiento": "1995-07-21"
+    },
+    {
+        "DocumentoID": "1234567801",
+        "Telefono": "+1234567801",
+        "Nombre": "Fernando Vega",
+        "TipoCliente": "Corporativo",
+        "ClienteID": "C012",
+        "CorreoElectronico": "fernando.vega@example.com",
+        "Direccion": "Avenida del Sol 789, Ciudad, País",
+        "FechaNacimiento": "1979-10-09"
+    }
+]

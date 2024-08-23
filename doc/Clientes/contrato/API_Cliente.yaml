@@ -1,0 +1,236 @@
+openapi: "3.0.1"
+info:
+  title: "Clientes API"
+  description: "API para gestionar clientes."
+  version: "1.0.0"
+servers:
+- url: "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "DEV"
+paths:
+  /clientes/{clienteID}:
+    get:
+      operationId: "getCliente"
+      parameters:
+      - name: "clienteID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MODEL344577"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getCustomerID/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    put:
+      operationId: "updateCliente"
+      parameters:
+      - name: "clienteID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MODEL933ef6"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:updateCustomer/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    delete:
+      operationId: "deleteCliente"
+      parameters:
+      - name: "clienteID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "204":
+          description: "204 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:deleteCustomer/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /clientes:
+    get:
+      operationId: "listClientes"
+      responses:
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfMODEL90272e"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getCustomer/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    post:
+      operationId: "createCliente"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MODEL25fec1"
+        required: true
+      responses:
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "201":
+          description: "201 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:createCustomer/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    MODEL25fec1:
+      type: "object"
+      properties:
+        ClienteID:
+          type: "string"
+        Nombre:
+          type: "string"
+        CorreoElectrónico:
+          type: "string"
+        Teléfono:
+          type: "string"
+        Dirección:
+          type: "string"
+        FechaNacimiento:
+          type: "string"
+          format: "date"
+        DocumentoID:
+          type: "string"
+        TipoCliente:
+          type: "string"
+    MODEL933ef6:
+      type: "object"
+      properties:
+        Nombre:
+          type: "string"
+        CorreoElectrónico:
+          type: "string"
+        Teléfono:
+          type: "string"
+        Dirección:
+          type: "string"
+        FechaNacimiento:
+          type: "string"
+          format: "date"
+        DocumentoID:
+          type: "string"
+        TipoCliente:
+          type: "string"
+    MODEL344577:
+      type: "object"
+      properties:
+        ClienteID:
+          type: "string"
+        Nombre:
+          type: "string"
+        CorreoElectrónico:
+          type: "string"
+        Teléfono:
+          type: "string"
+        Dirección:
+          type: "string"
+        FechaNacimiento:
+          type: "string"
+          format: "date"
+        DocumentoID:
+          type: "string"
+        TipoCliente:
+          type: "string"
+    ArrayOfMODEL90272e:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          ClienteID:
+            type: "string"
+          Nombre:
+            type: "string"
+          CorreoElectrónico:
+            type: "string"
+          Teléfono:
+            type: "string"
+          Dirección:
+            type: "string"
+          FechaNacimiento:
+            type: "string"
+            format: "date"
+          DocumentoID:
+            type: "string"
+          TipoCliente:
+            type: "string"

@@ -1,0 +1,10 @@
+{
+    "VentaReservaID": "VR021",
+    "UnidadID": "U027",
+    "ClienteID": "C002",
+    "FechaTransaccion": "2024-08-19",
+    "TipoTransaccion": "Venta",
+    "Comision": 15000.00,
+    "Estado": "Confirmado",
+    "ProjectID": "P001"
+}

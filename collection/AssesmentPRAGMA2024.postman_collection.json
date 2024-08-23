@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "c121347e-fec8-4900-bc9a-aaf48f6394c3",
+		"name": "AssesmentPRAGMA2024",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18224679"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "createProject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProjectID\": \"P015\",\r\n    \"ProjectName\": \"Nuevo Proyecto\",\r\n    \"Type\": \"Proyecto\",\r\n    \"Responsible\": \"Pepito Pérez\",\r\n    \"ProjectType\": \"Residencial\",\r\n    \"StartDate\": \"2024-09-01\",\r\n    \"EndDate\": \"2025-09-01\",\r\n    \"Stage\": \"En Progreso\",\r\n    \"AssignedResources\": [\r\n        {\r\n            \"ResourceID\": \"R001\",\r\n            \"Quantity\": 5\r\n        },\r\n        {\r\n            \"ResourceID\": \"R002\",\r\n            \"Quantity\": 10\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/DEV/proyectos",
+							"protocol": "https",
+							"host": [
+								"8her9az8a3",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"proyectos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProject",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/DEV/proyectos/P015",
+							"protocol": "https",
+							"host": [
+								"8her9az8a3",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"proyectos",
+								"P015"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProject",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProjectName\": \"Nuevo Nombre del Proyecto\",\r\n    \"Type\": \"Renovación\",\r\n    \"Responsible\": \"María\",\r\n    \"ProjectType\": \"Comercial\",\r\n    \"StartDate\": \"2024-10-01\",\r\n    \"EndDate\": \"2025-10-01\",\r\n    \"Stage\": \"En Progreso\",\r\n    \"AssignedResources\": [\r\n        {\r\n            \"ResourceID\": \"R001\",\r\n            \"Quantity\": 3\r\n        },\r\n        {\r\n            \"ResourceID\": \"R002\",\r\n            \"Quantity\": 7\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/DEV/proyectos/P015",
+							"protocol": "https",
+							"host": [
+								"8her9az8a3",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"proyectos",
+								"P015"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProjects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJraWQiOiJXQ3NvSDhOdDhhS0lcL0FNWGlrT1wvTmZHRytuMzlVSkJ6NGVlWlF0cmc3V289IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiWC05LW1PVFNtMVJkWU9ra0MxellwdyIsInN1YiI6IjkxMmJhNWEwLTgwMDEtNzA4Zi1mYTRjLTE4NjFmZjA1MDA3NyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9nRlJzcHhLTlAiLCJjb2duaXRvOnVzZXJuYW1lIjoicmlhbmhlcm4iLCJhdWQiOiI2MmpicGg4cXNoa3Y2bDFicGtmazlmZWJvOSIsImV2ZW50X2lkIjoiNWExNzA1ZmYtNTFhYS00MTI2LWI0NjQtZTlmMTE1M2ZkNzMxIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MjQzMzQyNjEsImV4cCI6MTcyNDMzNzg2MSwiaWF0IjoxNzI0MzM0MjYxLCJqdGkiOiJiODVmNmRiYy00ZWE0LTRmYzUtOWM3OS0xZjk1YzM0YmFhYjMiLCJlbWFpbCI6InJpY2FyZG9haGVybmFuZGV6Y0BnbWFpbC5jb20ifQ.EFtY6IWK1161o8YX-67qnZiiLOxzQpzIxfN9HVPG5GQtakbjptOn1lbVpo5AheKyppVbch1CkfT2-HOtmIRqJkXk-6ozta60j9i_wpUItFriYwWP4d66BwJBbC6rgxWqmW3DfjNWDgk2NOIQjc4NFxjfU_Ya8W2tnLprXyh0krmBx5DU6r4B4BARi5IY7V_E92CW8Q1r51D110sRDywhQhtXtSgOHv6OF-fO-tXtFXub6_3Mpx9SpBHnGX655IfTKqlgVEnOsFUZvbq5keJNZP0_WQp_y9pcz0um2FI6VsCWDMba0olWH-42LRYnfM-1d8993VQqAwfcetE_E5b-JA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/DEV/proyectos",
+							"protocol": "https",
+							"host": [
+								"8her9az8a3",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"proyectos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProjectID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/DEV/proyectos/P009",
+							"protocol": "https",
+							"host": [
+								"8her9az8a3",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"proyectos",
+								"P009"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Units",
+			"item": [
+				{
+					"name": "getUnits",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJraWQiOiJXQ3NvSDhOdDhhS0lcL0FNWGlrT1wvTmZHRytuMzlVSkJ6NGVlWlF0cmc3V289IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiVzNQYXFkdFkxWGkzd0UyNlpfbXVVdyIsInN1YiI6IjkxMmJhNWEwLTgwMDEtNzA4Zi1mYTRjLTE4NjFmZjA1MDA3NyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9nRlJzcHhLTlAiLCJjb2duaXRvOnVzZXJuYW1lIjoicmlhbmhlcm4iLCJhdWQiOiI2MmpicGg4cXNoa3Y2bDFicGtmazlmZWJvOSIsImV2ZW50X2lkIjoiYWFjNTBlMWQtZTliZS00NzFjLWJkZjMtZmJmMWFmNGMxZWMyIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MjQzNzU0NjUsImV4cCI6MTcyNDM3OTA2NSwiaWF0IjoxNzI0Mzc1NDY1LCJqdGkiOiI0YzMyZTQ5My0wNjc0LTQ0NTctOWFmNS1jN2YxZjIzNmVhZWYiLCJlbWFpbCI6InJpY2FyZG9haGVybmFuZGV6Y0BnbWFpbC5jb20ifQ.iY-iaddFpWmf_slV-655W2s0P9EoFN7_DAma6Wc-J3iqlJyvf494yhtqSSphFR7mJj4gtyOU5PKK25ziiUuiuKJyv1MatbI2pMnzFyp7BQFQ0z7tltD8Oq2otkOu4O05g5Sm0jTQz9jL6hxWyOXaEo1hmeFanGvQNhC9EOj93kwP7J15ZxI3dchAX6PuZzi6Z3ATXoMcIrHfgmW_1Ip3gm85hS1FqysG82DvwDNjmCJo9_jeujmAk6rosZvxDbsnIy83rkX6pIy9ogQOzrKs4qn1-G0sVGXwX24cLjrhocEVcYvyfDfskC899usFogP2OnDXJfoH4VNRACUeEiYwjw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/Dev/unidades",
+							"protocol": "https",
+							"host": [
+								"1hy9wgxhwb",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Dev",
+								"unidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUnitID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJraWQiOiJXQ3NvSDhOdDhhS0lcL0FNWGlrT1wvTmZHRytuMzlVSkJ6NGVlWlF0cmc3V289IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiVzNQYXFkdFkxWGkzd0UyNlpfbXVVdyIsInN1YiI6IjkxMmJhNWEwLTgwMDEtNzA4Zi1mYTRjLTE4NjFmZjA1MDA3NyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9nRlJzcHhLTlAiLCJjb2duaXRvOnVzZXJuYW1lIjoicmlhbmhlcm4iLCJhdWQiOiI2MmpicGg4cXNoa3Y2bDFicGtmazlmZWJvOSIsImV2ZW50X2lkIjoiYWFjNTBlMWQtZTliZS00NzFjLWJkZjMtZmJmMWFmNGMxZWMyIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MjQzNzU0NjUsImV4cCI6MTcyNDM3OTA2NSwiaWF0IjoxNzI0Mzc1NDY1LCJqdGkiOiI0YzMyZTQ5My0wNjc0LTQ0NTctOWFmNS1jN2YxZjIzNmVhZWYiLCJlbWFpbCI6InJpY2FyZG9haGVybmFuZGV6Y0BnbWFpbC5jb20ifQ.iY-iaddFpWmf_slV-655W2s0P9EoFN7_DAma6Wc-J3iqlJyvf494yhtqSSphFR7mJj4gtyOU5PKK25ziiUuiuKJyv1MatbI2pMnzFyp7BQFQ0z7tltD8Oq2otkOu4O05g5Sm0jTQz9jL6hxWyOXaEo1hmeFanGvQNhC9EOj93kwP7J15ZxI3dchAX6PuZzi6Z3ATXoMcIrHfgmW_1Ip3gm85hS1FqysG82DvwDNjmCJo9_jeujmAk6rosZvxDbsnIy83rkX6pIy9ogQOzrKs4qn1-G0sVGXwX24cLjrhocEVcYvyfDfskC899usFogP2OnDXJfoH4VNRACUeEiYwjw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/Dev/unidades/U004/P001",
+							"protocol": "https",
+							"host": [
+								"1hy9wgxhwb",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Dev",
+								"unidades",
+								"U004",
+								"P001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUnit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UnidadID\": \"U103\",\r\n    \"ProyectoID\": \"P001\",\r\n    \"NombreUnidad\": \"Unidad Deluxe\",\r\n    \"Precio\": 350000.00,\r\n    \"Estado\": \"Disponible\",\r\n    \"QRCode\": \"QR0003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/Dev/unidades",
+							"protocol": "https",
+							"host": [
+								"1hy9wgxhwb",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Dev",
+								"unidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUnit",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/Dev/unidades/U103/P001",
+							"protocol": "https",
+							"host": [
+								"1hy9wgxhwb",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Dev",
+								"unidades",
+								"U103",
+								"P001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUnit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UnidadID\": \"U103\",\r\n    \"ProyectoID\": \"P001\",\r\n    \"NombreUnidad\": \"Unidad Premium\",\r\n    \"Precio\": 400000.00,\r\n    \"Estado\": \"Ocupado\",\r\n    \"QRCode\": \"QR003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/Dev/unidades/U103",
+							"protocol": "https",
+							"host": [
+								"1hy9wgxhwb",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Dev",
+								"unidades",
+								"U103"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "getCustomer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/DEV/clientes",
+							"protocol": "https",
+							"host": [
+								"n0lolxi73d",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/DEV/clientes/C007",
+							"protocol": "https",
+							"host": [
+								"n0lolxi73d",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"clientes",
+								"C007"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCustomer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ClienteID\": \"C017\",\r\n  \"CorreoElectronico\": \"juan.perez@example.com\",\r\n  \"Direccion\": \"Avenida Principal 456, Ciudad, País\",\r\n  \"DocumentoID\": \"0987654321\",\r\n  \"FechaNacimiento\": \"1992-11-23\",\r\n  \"Nombre\": \"Juan Pérez\",\r\n  \"Telefono\": \"+0987654321\",\r\n  \"TipoCliente\": \"Empresa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/DEV/clientes",
+							"protocol": "https",
+							"host": [
+								"n0lolxi73d",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/DEV/clientes/C017",
+							"protocol": "https",
+							"host": [
+								"n0lolxi73d",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"clientes",
+								"C017"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"CorreoElectronico\": \"juana.perez@empresa.com\",\r\n  \"Direccion\": \"Avenida Secundaria 789, Ciudad, País\",\r\n  \"DocumentoID\": \"0987654321asdwfgafs\",\r\n  \"FechaNacimiento\": \"1992-11-23\",\r\n  \"Nombre\": \"Juana Pérez\",\r\n  \"Telefono\": \"+0987654321\",\r\n  \"TipoCliente\": \"Corporativo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://n0lolxi73d.execute-api.us-east-2.amazonaws.com/DEV/clientes/C017",
+							"protocol": "https",
+							"host": [
+								"n0lolxi73d",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"clientes",
+								"C017"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"item": [
+				{
+					"name": "getResourceID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tera890pij.execute-api.us-east-2.amazonaws.com/dev/recursos/R001",
+							"protocol": "https",
+							"host": [
+								"tera890pij",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"recursos",
+								"R001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getResources",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tera890pij.execute-api.us-east-2.amazonaws.com/dev/recursos",
+							"protocol": "https",
+							"host": [
+								"tera890pij",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"recursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createResource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"RecursoID\": \"R011\",\r\n  \"NombreRecurso\": \"Recurso Ejemplo\",\r\n  \"CantidadDisponible\": 100,\r\n  \"TipoRecurso\": \"Material\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tera890pij.execute-api.us-east-2.amazonaws.com/dev/recursos",
+							"protocol": "https",
+							"host": [
+								"tera890pij",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"recursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteResource",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tera890pij.execute-api.us-east-2.amazonaws.com/dev/recursos/R011",
+							"protocol": "https",
+							"host": [
+								"tera890pij",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"recursos",
+								"R011"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateResource",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"NombreRecurso\": \"Taladro\",\r\n  \"CantidadDisponible\": 150,\r\n  \"TipoRecurso\": \"Herramienta\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tera890pij.execute-api.us-east-2.amazonaws.com/dev/recursos/R011",
+							"protocol": "https",
+							"host": [
+								"tera890pij",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"dev",
+								"recursos",
+								"R011"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales&Reserve",
+			"item": [
+				{
+					"name": "getSalesReserve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/DEV/ventas-reservas",
+							"protocol": "https",
+							"host": [
+								"b93gc35as1",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"ventas-reservas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSaleReserveID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/DEV/ventas-reservas/VR004",
+							"protocol": "https",
+							"host": [
+								"b93gc35as1",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"ventas-reservas",
+								"VR004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSaleReserve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"VentaReservaID\": \"VR021\",\r\n    \"UnidadID\": \"U027\",\r\n    \"ClienteID\": \"C002\",\r\n    \"FechaTransaccion\": \"2024-08-19\",\r\n    \"TipoTransaccion\": \"Venta\",\r\n    \"Comision\": 15000.00,\r\n    \"Estado\": \"Confirmado\",\r\n    \"ProjectID\": \"P001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/DEV/ventas-reservas",
+							"protocol": "https",
+							"host": [
+								"b93gc35as1",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"ventas-reservas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSaleReserve",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/DEV/ventas-reservas/VR021",
+							"protocol": "https",
+							"host": [
+								"b93gc35as1",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"ventas-reservas",
+								"VR021"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSaleReserve",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UnidadID\": \"U028\",\r\n    \"ClienteID\": \"C003\",\r\n    \"FechaTransacción\": \"2024-08-20\",\r\n    \"TipoTransacción\": \"Reserva\",\r\n    \"Comisión\": 20000.00,\r\n    \"Estado\": \"Pendiente\",\r\n    \"ProjectID\": \"P002\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/DEV/ventas-reservas/VR021",
+							"protocol": "https",
+							"host": [
+								"b93gc35as1",
+								"execute-api",
+								"us-east-2",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"DEV",
+								"ventas-reservas",
+								"VR021"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

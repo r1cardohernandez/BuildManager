@@ -1,0 +1,9 @@
+{
+    "UnidadID": "U028",
+    "ClienteID": "C003",
+    "FechaTransacción": "2024-08-20",
+    "TipoTransacción": "Reserva",
+    "Comisión": 20000.00,
+    "Estado": "Pendiente",
+    "ProjectID": "P002"
+}

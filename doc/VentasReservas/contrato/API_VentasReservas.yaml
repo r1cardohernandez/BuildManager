@@ -1,0 +1,265 @@
+openapi: "3.0.1"
+info:
+  title: "Ventas y Reservas API"
+  description: "API para gestionar ventas y reservas de unidades."
+  version: "1.0.0"
+servers:
+- url: "https://b93gc35as1.execute-api.us-east-2.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "DEV"
+paths:
+  /ventas-reservas:
+    get:
+      operationId: "getVentasReservas"
+      responses:
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfMODELdde938"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getSalesReserve/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    post:
+      operationId: "createVentaReserva"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MODELcf14b7"
+        required: true
+      responses:
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "201":
+          description: "201 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MODELcabaff"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:createSalesReserve/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /ventas-reservas/{ventaReservaID}:
+    get:
+      operationId: "getVentaReservaById"
+      parameters:
+      - name: "ventaReservaID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MODELac168f"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getSalesReserveID/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    put:
+      operationId: "updateVentaReserva"
+      parameters:
+      - name: "ventaReservaID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MODEL80c912"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MODEL42e206"
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:updateSalesReserve/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    delete:
+      operationId: "deleteVentaReserva"
+      parameters:
+      - name: "ventaReservaID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "204":
+          description: "204 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:deleteSaleReserve/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    ArrayOfMODELdde938:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          VentaReservaID:
+            type: "string"
+          UnidadID:
+            type: "string"
+          ClienteID:
+            type: "string"
+          FechaTransacción:
+            type: "string"
+            format: "date"
+          TipoTransacción:
+            type: "string"
+          Comisión:
+            type: "number"
+            format: "float"
+          Estado:
+            type: "string"
+          ProyectoID:
+            type: "string"
+    MODELac168f:
+      type: "object"
+      properties:
+        VentaReservaID:
+          type: "string"
+        UnidadID:
+          type: "string"
+        ClienteID:
+          type: "string"
+        FechaTransacción:
+          type: "string"
+          format: "date"
+        TipoTransacción:
+          type: "string"
+        Comisión:
+          type: "number"
+          format: "float"
+        Estado:
+          type: "string"
+        ProyectoID:
+          type: "string"
+    MODELcf14b7:
+      required:
+      - "ClienteID"
+      - "Comisión"
+      - "Estado"
+      - "FechaTransacción"
+      - "ProyectoID"
+      - "TipoTransacción"
+      - "UnidadID"
+      - "VentaReservaID"
+      type: "object"
+      properties:
+        VentaReservaID:
+          type: "string"
+        UnidadID:
+          type: "string"
+        ClienteID:
+          type: "string"
+        FechaTransacción:
+          type: "string"
+          format: "date"
+        TipoTransacción:
+          type: "string"
+        Comisión:
+          type: "number"
+          format: "float"
+        Estado:
+          type: "string"
+        ProyectoID:
+          type: "string"
+    MODEL80c912:
+      type: "object"
+      properties:
+        UnidadID:
+          type: "string"
+        ClienteID:
+          type: "string"
+        FechaTransacción:
+          type: "string"
+          format: "date"
+        TipoTransacción:
+          type: "string"
+        Comisión:
+          type: "number"
+          format: "float"
+        Estado:
+          type: "string"
+        ProyectoID:
+          type: "string"
+    MODELcabaff:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+    MODEL42e206:
+      type: "object"
+      properties:
+        message:
+          type: "string"

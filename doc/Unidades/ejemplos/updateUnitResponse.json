@@ -1,0 +1,9 @@
+{
+    "message": "Unidad actualizada con éxito",
+    "updatedAttributes": {
+        "Estado": "Ocupado",
+        "Precio": 400000.0,
+        "NombreUnidad": "Unidad Premium",
+        "QRCode": "QR003"
+    }
+}

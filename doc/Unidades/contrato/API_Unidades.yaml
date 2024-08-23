@@ -1,0 +1,150 @@
+openapi: "3.0.1"
+info:
+  title: "Unidades API"
+  description: "API para gestionar unidades de vivienda en DynamoDB."
+  version: "1.0.0"
+servers:
+- url: "https://1hy9wgxhwb.execute-api.us-east-2.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "Dev"
+paths:
+  /unidades:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfUnit"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getUnits/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Unit"
+        required: true
+      responses:
+        "201":
+          description: "201 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unit"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:createUnit/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /unidades/{unidadID}/{projectID}:
+    get:
+      parameters:
+      - name: "unidadID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "projectID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getUnitID/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    delete:
+      parameters:
+      - name: "unidadID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "projectID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:deleteUnit/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /unidades/{unidadID}:
+    put:
+      parameters:
+      - name: "unidadID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Unit"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unit"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:updateUnit/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    ArrayOfUnit:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Unit"
+    Unit:
+      type: "object"
+      properties:
+        UnidadID:
+          type: "string"
+        ProyectoID:
+          type: "string"
+        NombreUnidad:
+          type: "string"
+        Precio:
+          type: "number"
+          format: "float"
+        Estado:
+          type: "string"
+        QRCode:
+          type: "string"

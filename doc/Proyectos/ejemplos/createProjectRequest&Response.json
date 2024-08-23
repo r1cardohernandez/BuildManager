@@ -1,0 +1,20 @@
+{
+    "ProjectID": "P015",
+    "ProjectName": "Nuevo Proyecto",
+    "Type": "Proyecto",
+    "Responsible": "Pepito Pérez",
+    "ProjectType": "Residencial",
+    "StartDate": "2024-09-01",
+    "EndDate": "2025-09-01",
+    "Stage": "En Progreso",
+    "AssignedResources": [
+        {
+            "ResourceID": "R001",
+            "Quantity": 5
+        },
+        {
+            "ResourceID": "R002",
+            "Quantity": 10
+        }
+    ]
+}

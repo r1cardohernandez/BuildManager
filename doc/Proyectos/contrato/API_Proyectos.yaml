@@ -1,0 +1,203 @@
+openapi: "3.0.1"
+info:
+  title: "Proyectos API"
+  description: "API para gestionar proyectos en DynamoDB."
+  version: "1.0.0"
+servers:
+- url: "https://8her9az8a3.execute-api.us-east-2.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "DEV"
+paths:
+  /proyectos:
+    get:
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfProject"
+      security:
+      - projectAuthorization: []
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getProjects/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    post:
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+        required: true
+      responses:
+        "201":
+          description: "201 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+      security:
+      - projectAuthorization: []
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:createProjects/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /proyectos/{projectID}:
+    get:
+      parameters:
+      - name: "projectID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+      security:
+      - projectAuthorization: []
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getProjectID/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    put:
+      parameters:
+      - name: "projectID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+      security:
+      - projectAuthorization: []
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:updateProjects/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    delete:
+      parameters:
+      - name: "projectID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      security:
+      - projectAuthorization: []
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:deleteProject/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    Project:
+      type: "object"
+      properties:
+        ProjectID:
+          type: "string"
+        NameProject:
+          type: "string"
+        ProjectType:
+          type: "string"
+        StartDate:
+          type: "string"
+          format: "date"
+        EndDate:
+          type: "string"
+          format: "date"
+        Status:
+          type: "string"
+        AssignedResources:
+          type: "array"
+          items:
+            type: "string"
+        Responsible:
+          type: "string"
+    ArrayOfProject:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Project"
+  securitySchemes:
+    projectAuthorization:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "cognito_user_pools"
+      x-amazon-apigateway-authorizer:
+        providerARNs:
+        - "arn:aws:cognito-idp:us-east-2:941377161031:userpool/us-east-2_gFRspxKNP"
+        type: "cognito_user_pools"

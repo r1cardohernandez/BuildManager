@@ -1,0 +1,10 @@
+{
+    "DocumentoID": "1234567896",
+    "Telefono": "+1234567896",
+    "Nombre": "Laura Fernández",
+    "TipoCliente": "Particular",
+    "ClienteID": "C007",
+    "CorreoElectronico": "laura.fernandez@example.com",
+    "Direccion": "Calle de la Esperanza 654, Ciudad, País",
+    "FechaNacimiento": "1987-04-25"
+}

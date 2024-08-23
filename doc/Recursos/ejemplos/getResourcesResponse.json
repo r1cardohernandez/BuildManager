@@ -1,0 +1,32 @@
+[
+    {
+        "RecursoID": "R008",
+        "TipoRecurso": "Material",
+        "CantidadDisponible": 350,
+        "NombreRecurso": "Tejas"
+    },
+    {
+        "RecursoID": "R004",
+        "TipoRecurso": "Material",
+        "CantidadDisponible": 700,
+        "NombreRecurso": "Madera"
+    },
+    {
+        "RecursoID": "R006",
+        "TipoRecurso": "Material",
+        "CantidadDisponible": 200,
+        "NombreRecurso": "Vidrio"
+    },
+    {
+        "RecursoID": "R001",
+        "TipoRecurso": "Material",
+        "CantidadDisponible": 1000,
+        "NombreRecurso": "Cemento"
+    },
+    {
+        "RecursoID": "R003",
+        "TipoRecurso": "Material",
+        "CantidadDisponible": 300,
+        "NombreRecurso": "Acero"
+    }
+]

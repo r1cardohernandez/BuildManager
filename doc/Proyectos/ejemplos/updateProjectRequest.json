@@ -1,0 +1,19 @@
+{
+    "ProjectName": "Nuevo Nombre del Proyecto",
+    "Type": "Renovación",
+    "Responsible": "María",
+    "ProjectType": "Comercial",
+    "StartDate": "2024-10-01",
+    "EndDate": "2025-10-01",
+    "Stage": "En Progreso",
+    "AssignedResources": [
+        {
+            "ResourceID": "R001",
+            "Quantity": 3
+        },
+        {
+            "ResourceID": "R002",
+            "Quantity": 7
+        }
+    ]
+}

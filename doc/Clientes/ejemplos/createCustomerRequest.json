@@ -1,0 +1,10 @@
+{
+    "ClienteID": "C017",
+    "CorreoElectronico": "juan.perez@example.com",
+    "Direccion": "Avenida Principal 456, Ciudad, País",
+    "DocumentoID": "0987654321",
+    "FechaNacimiento": "1992-11-23",
+    "Nombre": "Juan Pérez",
+    "Telefono": "+0987654321",
+    "TipoCliente": "Empresa"
+  }

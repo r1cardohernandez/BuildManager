@@ -1,0 +1,177 @@
+openapi: "3.0.1"
+info:
+  title: "API de Recursos"
+  description: "API para gestionar recursos."
+  version: "1.0.0"
+servers:
+- url: "https://tera890pij.execute-api.us-east-2.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "dev"
+paths:
+  /recursos/{recursoID}:
+    get:
+      operationId: "getRecursoById"
+      parameters:
+      - name: "recursoID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recurso"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getResourcesID/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    put:
+      operationId: "updateRecurso"
+      parameters:
+      - name: "recursoID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Recurso"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content: {}
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:updateResources/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    delete:
+      operationId: "deleteRecurso"
+      parameters:
+      - name: "recursoID"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "204":
+          description: "204 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:deleteResources/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+  /recursos:
+    get:
+      operationId: "getRecursos"
+      responses:
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfRecurso"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:getResources/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    post:
+      operationId: "createRecurso"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Recurso"
+        required: true
+      responses:
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "201":
+          description: "201 response"
+          content: {}
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:941377161031:function:createResources/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+components:
+  schemas:
+    ArrayOfRecurso:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Recurso"
+    Recurso:
+      required:
+      - "CantidadDisponible"
+      - "NombreRecurso"
+      - "RecursoID"
+      - "TipoRecurso"
+      type: "object"
+      properties:
+        RecursoID:
+          type: "string"
+        NombreRecurso:
+          type: "string"
+        CantidadDisponible:
+          type: "integer"
+          format: "int32"
+        TipoRecurso:
+          type: "string"

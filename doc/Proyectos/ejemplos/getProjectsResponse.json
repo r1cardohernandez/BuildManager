@@ -1,0 +1,32 @@
+[
+    {
+        "ProjectName": "Biblioteca Central J",
+        "Stage": "En curso",
+        "ProjectType": "Cultural",
+        "StartDate": "2023-09-01",
+        "ProjectID": "P010",
+        "Responsible": "Silvia Castro",
+        "Type": "Proyecto",
+        "EndDate": "2024-11-01",
+        "AssignedResources": {
+            "Personnel": "15 personas",
+            "Machinery": "3 grúas",
+            "Materials": "300 toneladas"
+        }
+    },
+    {
+        "ProjectName": "Condominio F",
+        "Stage": "Planificado",
+        "ProjectType": "Residencial",
+        "StartDate": "2024-04-15",
+        "ProjectID": "P006",
+        "Responsible": "Laura Sánchez",
+        "Type": "Proyecto",
+        "EndDate": "2025-10-15",
+        "AssignedResources": {
+            "Personnel": "35 personas",
+            "Machinery": "6 montacargas",
+            "Materials": "900 toneladas"
+        }
+    }
+]

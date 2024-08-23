@@ -1,0 +1,42 @@
+[
+    {
+        "UnidadID": "U020",
+        "VentaReservaID": "VR009",
+        "ProjectID": "P004",
+        "Estado": "Reservada",
+        "ClienteID": "C009",
+        "Comision": 8000.0,
+        "FechaTransaccion": "2024-08-31",
+        "TipoTransaccion": "Reserva"
+    },
+    {
+        "UnidadID": "U029",
+        "VentaReservaID": "VR008",
+        "ProjectID": "P006",
+        "Estado": "Reservada",
+        "ClienteID": "C008",
+        "Comision": 13500.0,
+        "FechaTransaccion": "2024-08-31",
+        "TipoTransaccion": "Reserva"
+    },
+    {
+        "UnidadID": "U016",
+        "VentaReservaID": "VR004",
+        "ProjectID": "P004",
+        "Estado": "Completa",
+        "ClienteID": "C004",
+        "Comision": 7000.0,
+        "FechaTransaccion": "2024-08-20",
+        "TipoTransaccion": "Venta"
+    },
+    {
+        "UnidadID": "U023",
+        "VentaReservaID": "VR005",
+        "ProjectID": "P005",
+        "Estado": "Completa",
+        "ClienteID": "C005",
+        "Comision": 11000.0,
+        "FechaTransaccion": "2024-08-25",
+        "TipoTransaccion": "Venta"
+    }
+]

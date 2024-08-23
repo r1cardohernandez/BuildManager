@@ -1,0 +1,34 @@
+[
+    {
+        "Precio": 560000.0,
+        "Estado": "En construcción",
+        "ProyectoID": "P007",
+        "NombreUnidad": "Nave 702",
+        "UnidadID": "U032",
+        "QRCode": "QRCODE_702"
+    },
+    {
+        "Precio": 220000.0,
+        "Estado": "Disponible",
+        "ProyectoID": "P005",
+        "NombreUnidad": "Oficina 503",
+        "UnidadID": "U023",
+        "QRCode": "QRCODE_503"
+    },
+    {
+        "Precio": 340000.0,
+        "Estado": "Planificado",
+        "ProyectoID": "P008",
+        "NombreUnidad": "Campo 805",
+        "UnidadID": "U040",
+        "QRCode": "QRCODE_805"
+    },
+    {
+        "Precio": 140000.0,
+        "Estado": "Disponible",
+        "ProyectoID": "P004",
+        "NombreUnidad": "Vila 401",
+        "UnidadID": "U016",
+        "QRCode": "QRCODE_401"
+    }
+]

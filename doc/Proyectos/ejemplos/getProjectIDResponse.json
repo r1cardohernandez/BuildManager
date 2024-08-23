@@ -1,0 +1,15 @@
+{
+    "ProjectName": "Edificio Residencial A",
+    "Stage": "En curso",
+    "ProjectType": "Residencial",
+    "StartDate": "2024-01-01",
+    "ProjectID": "P001",
+    "Responsible": "Juan Pérez",
+    "Type": "Proyecto",
+    "EndDate": "2025-01-01",
+    "AssignedResources": {
+        "Personnel": "20 personas",
+        "Machinery": "5 excavadoras",
+        "Materials": "500 toneladas"
+    }
+}
